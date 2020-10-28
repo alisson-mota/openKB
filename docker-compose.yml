@@ -1,0 +1,20 @@
+version: "3.3"
+
+services:
+
+  openkb:
+    image: wachiwi/openkb
+    restart: always
+    ports:
+      - 4444:4444
+    volumes:
+      - .data/data:/var/openKB/data
+      - .data/uploads:/var/openKB/public/uploads
+
+  db:
+    image: mongo:4
+    volumes:
+      - ./volumes/db:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=openkb_user
+      - MONGO_INITDB_ROOT_PASSWORD=openkb_pass
